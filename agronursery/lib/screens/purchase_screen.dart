@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../services/firestore_service.dart';
+import '../models/order_model.dart';
 
 class PurchaseScreen extends StatefulWidget {
   const PurchaseScreen({super.key});
@@ -14,6 +16,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
   final _nameCtrl = TextEditingController();
   final _phoneCtrl = TextEditingController();
   final _addressCtrl = TextEditingController();
+  bool _submitting = false;
 
   @override
   void dispose() {
@@ -74,10 +77,10 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                           child: const Icon(Icons.image, color: AppColors.green, size: 40),
                         ),
                         const SizedBox(width: 14),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Mango Sapling (Kesar)', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: AppColors.textPrimary)),
                               SizedBox(height: 6),
                               Text('Green Leaf Nursery', style: TextStyle(color: AppColors.textSecondary)),
@@ -171,12 +174,66 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        // Submit action placeholder
+                    onPressed: _submitting
+                        ? null
+                        : () async {
+                      if (!(_formKey.currentState?.validate() ?? false)) return;
+
+                      final args = (ModalRoute.of(context)?.settings.arguments as Map?) ?? {};
+                      final buyerId = (args['buyerId'] as String?)?.trim() ?? '';
+                      final productId = (args['productId'] as String?)?.trim() ?? '';
+                      final sellerId = (args['sellerId'] as String?)?.trim() ?? '';
+                      final price = (args['price'] as num?) ?? 0;
+
+                      final qty = int.tryParse(_qtyCtrl.text.trim()) ?? 0;
+                      final name = _nameCtrl.text.trim();
+                      final phone = _phoneCtrl.text.trim();
+                      final address = _addressCtrl.text.trim();
+
+                      if (buyerId.isEmpty || productId.isEmpty || sellerId.isEmpty || price <= 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Order placed')), 
+                          const SnackBar(content: Text('Missing product details. Please try again.')),
                         );
+                        return;
+                      }
+
+                      setState(() => _submitting = true);
+                      try {
+                        final result = await FirestoreService.instance.createOrderIfNotExists(
+                          buyerId: buyerId,
+                          productId: productId,
+                          sellerId: sellerId,
+                          quantity: qty,
+                          price: price,
+                          buyerName: name,
+                          phone: phone,
+                          address: address,
+                        );
+
+                        final existed = result.existed;
+                        final msg = existed ? 'Order already exists' : 'Order created';
+
+                        await showDialog<void>(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Success'),
+                            content: Text(msg),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(ctx).pop(),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+
+                        if (mounted) Navigator.of(context).pop<OrderModel>(result.order);
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Failed to place order: $e')),
+                        );
+                      } finally {
+                        if (mounted) setState(() => _submitting = false);
                       }
                     },
                     style: ElevatedButton.styleFrom(
