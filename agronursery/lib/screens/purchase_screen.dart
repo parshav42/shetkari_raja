@@ -56,7 +56,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
           ),
           centerTitle: true,
           title: const Text(
-            'Purchase',
+            'Order',
             style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w800),
           ),
         ),
