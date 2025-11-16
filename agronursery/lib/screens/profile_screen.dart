@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final VoidCallback? onBackToHome;
+  const ProfileScreen({super.key, this.onBackToHome});
 
   @override
   Widget build(BuildContext context) {
-    final lightGreen = Color.lerp(AppColors.green, Colors.white, 0.85)!;
-    final lightBlue = Color.lerp(AppColors.blue, Colors.white, 0.85)!;
+    final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+    final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -22,6 +23,17 @@ class ProfileScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 2,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            color: AppColors.textPrimary,
+            onPressed: () {
+              if (onBackToHome != null) {
+                onBackToHome!();
+              } else {
+                Navigator.of(context).pop();
+              }
+            },
+          ),
           centerTitle: true,
           title: const Text(
             'Profile',

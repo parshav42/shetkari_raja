@@ -6,8 +6,9 @@ class LeadsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lightGreen = Color.lerp(AppColors.green, Colors.white, 0.85)!;
-    final lightBlue = Color.lerp(AppColors.blue, Colors.white, 0.85)!;
+   final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+    final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+
 
     final leads = const [
       _LeadItem(name: 'Rahul Patil', crop: 'Mango Sapling', qty: '20'),
