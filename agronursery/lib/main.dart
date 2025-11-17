@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:agronursery/screens/role_selection_screen.dart';
 import 'package:agronursery/screens/farmer_home_screen.dart';
-import 'package:agronursery/screens/nursery_owner_screen.dart';
+import 'package:agronursery/screens/nursery_dashboard_screen.dart';
 import 'package:agronursery/theme/app_theme.dart';
 import 'package:agronursery/screens/splash_screen.dart';
 import 'package:agronursery/screens/category_selection_screen.dart';
@@ -13,6 +13,7 @@ import 'package:agronursery/screens/add_stock_screen.dart';
 import 'package:agronursery/screens/my_stock_screen.dart';
 import 'package:agronursery/screens/leads_screen.dart';
 import 'package:agronursery/screens/profile_screen.dart';
+import 'package:agronursery/screens/regiatration_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/nearby': (context) => const NearbyNurseriesScreen(),
         '/purchase': (context) => const PurchaseScreen(),
         '/nursery-login': (context) => const NurseryOtpLoginScreen(),
+        '/nursery-register': (context) => const NurseryRegisterPage(),
         '/add-stock': (context) => const AddStockScreen(),
         '/my-stock': (context) => const MyStockScreen(),
         '/leads': (context) => const LeadsScreen(),

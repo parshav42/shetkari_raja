@@ -21,7 +21,7 @@ class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
   @override
   Widget build(BuildContext context) {
    final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
-    final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+    final lightBlue = Color.lerp(AppColors.blue, AppColors.green, 0.85)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -140,6 +140,23 @@ class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
                           ],
                         ),
                       ),
+                    ),
+                  ),
+                   SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/nursery-register');
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        textStyle: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                        ),
+                      ),
+                      child: const Text('New User? Register Here'),
                     ),
                   ),
                 ],

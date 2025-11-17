@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'profile_screen.dart';
 import 'purchase_screen.dart';
-
-// Import widget pages
 import '../widgets/sugercane_page.dart';
 import '../widgets/tomato_page.dart';
 import '../widgets/mango_page.dart';

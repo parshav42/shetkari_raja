@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'regiatration_page.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});
@@ -51,7 +52,11 @@ class RoleSelectionScreen extends StatelessWidget {
                   _RoleButton(
                     title: 'Nursery Owner',
                     icon: Icons.storefront,
-                    onTap: () => Navigator.of(context).pushNamed('/nursery'),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const NurseryRegisterPage(),
+                      ),
+                    ),
                   ),
                 ],
               ),

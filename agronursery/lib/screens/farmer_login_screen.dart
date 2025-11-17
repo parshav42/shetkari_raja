@@ -34,7 +34,7 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
 
   void _verifyOtp() {
     final otp = _otpCtrl.text.trim();
-    if (otp.length == 6) {
+    if (otp.length == 4) {
       // Simulate successful verification
       Navigator.of(context).pushNamedAndRemoveUntil(
         '/farmer',
@@ -42,16 +42,16 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid 6-digit OTP')),
+        const SnackBar(content: Text('Please enter a valid 4-digit OTP')),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
-    final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
-
+   
+ final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+    final lightBlue = Color.lerp(AppColors.blue, AppColors.green, 0.85)!;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -157,7 +157,7 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
                               TextFormField(
                                 controller: _otpCtrl,
                                 keyboardType: TextInputType.number,
-                                maxLength: 6,
+                                maxLength: 4,
                                 decoration: const InputDecoration(
                                   labelText: 'OTP',
                                   hintText: 'Enter 4-digit OTP',
@@ -167,7 +167,7 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
                                   final otp = v?.trim() ?? '';
                                   if (otp.isEmpty) return 'Please enter OTP';
                                   if (otp.length != 4) {
-                                    return 'OTP must be 6 digits';
+                                    return 'OTP must be 4 digits';
                                   }
                                   return null;
                                 },
