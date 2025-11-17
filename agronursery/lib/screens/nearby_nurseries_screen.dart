@@ -9,7 +9,7 @@ class NearbyNurseriesScreen extends StatelessWidget {
     final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
     final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
 
-    final items = const [
+    const items = [
       _NurseryItem(
         nurseryName: 'Green Leaf Nursery',
         price: '₹180',

@@ -13,7 +13,7 @@ class TomatoPage extends StatelessWidget {
     final lightOrange = Color.lerp(Colors.orange, Colors.white, 0.85)!;
 
     // Example items for tomato page grid
-    final items = const [
+    const items = [
       _CardItem(label: 'Hybrid 1', asset: 'assets/images/tomato1.jpg'),
       _CardItem(label: 'Hybrid 2', asset: 'assets/images/tomato2.png'),
       _CardItem(label: 'Local 1', asset: 'assets/images/tomato3.png'),
@@ -94,8 +94,8 @@ class _ImageCard extends StatelessWidget {
     required this.label,
     required this.imageAsset,
     required this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -65,7 +65,7 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
       ),
       child: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -96,7 +96,7 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen> {
 }
 
 class HomeGridPage extends StatelessWidget {
-  const HomeGridPage({Key? key}) : super(key: key);
+  const HomeGridPage({super.key});
 
   final List<_Category> categories = const [
     _Category(label: 'Sugarcane', icon: Icons.grass, asset: 'assets/sugarcane.png'),
@@ -129,13 +129,11 @@ class HomeGridPage extends StatelessWidget {
         page = CategoryDetailPage(label: category);
     }
     
-    if (page != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => page!),
-      );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page!),
+    );
     }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -265,10 +263,9 @@ class _CategoryCard extends StatelessWidget {
   const _CategoryCard({
     required this.label,
     required this.icon,
-    this.color,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -310,7 +307,7 @@ class _CategoryCard extends StatelessWidget {
 
 class CategoryDetailPage extends StatelessWidget {
   final String label;
-  const CategoryDetailPage({required this.label, Key? key}) : super(key: key);
+  const CategoryDetailPage({required this.label, super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -19,8 +19,6 @@ class AppTheme {
       onSecondary: Colors.white,
       error: Colors.red,
       onError: Colors.white,
-      background: Color(0xFFF6F8FA),
-      onBackground: AppColors.textPrimary,
       surface: Colors.white,
       onSurface: AppColors.textPrimary,
       tertiary: AppColors.accent,
@@ -31,7 +29,7 @@ class AppTheme {
       colorScheme: scheme,
       useMaterial3: true,
       fontFamily: 'Roboto',
-      scaffoldBackgroundColor: scheme.background,
+      scaffoldBackgroundColor: scheme.surface,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,

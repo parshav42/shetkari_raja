@@ -68,7 +68,7 @@ class _AddStockScreenState extends State<AddStockScreen> {
                       const SizedBox(height: 14),
                       // Crop dropdown
                       DropdownButtonFormField<String>(
-                        value: _selectedCrop,
+                        initialValue: _selectedCrop,
                         decoration: const InputDecoration(
                           labelText: 'Crop',
                         ),
@@ -93,9 +93,9 @@ class _AddStockScreenState extends State<AddStockScreen> {
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(color: const Color(0xFFE0E3E7)),
                           ),
-                          child: Column(
+                          child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Icon(Icons.image_outlined, color: AppColors.textSecondary),
                               SizedBox(height: 8),
                               Text('Tap to upload crop image', style: TextStyle(color: AppColors.textSecondary)),

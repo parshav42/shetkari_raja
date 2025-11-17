@@ -36,28 +36,28 @@ class _NurseryOwnerScreenState extends State<NurseryOwnerScreen> {
             style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w800),
           ),
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Top stat cards
                 Row(
-                  children: const [
+                  children: [
                     Expanded(child: _StatCard(title: "Today's Views", value: '320', icon: Icons.visibility, color: AppColors.blue)),
                     SizedBox(width: 12),
                     Expanded(child: _StatCard(title: "Today's Orders", value: '12', icon: Icons.shopping_bag_outlined, color: AppColors.green)),
                   ],
                 ),
-                const SizedBox(height: 12),
-                const _StatCard(title: "Today's Sales", value: '₹1,540', icon: Icons.currency_rupee, color: AppColors.accent),
-                const SizedBox(height: 20),
+                SizedBox(height: 12),
+                _StatCard(title: "Today's Sales", value: '₹1,540', icon: Icons.currency_rupee, color: AppColors.accent),
+                SizedBox(height: 20),
 
                 // Action buttons
-                const _ActionButton(title: 'Add Stock', icon: Icons.add_box_outlined),
-                const SizedBox(height: 12),
-                const _ActionButton(title: 'My Stock', icon: Icons.inventory_2_outlined),
+                _ActionButton(title: 'Add Stock', icon: Icons.add_box_outlined),
+                SizedBox(height: 12),
+                _ActionButton(title: 'My Stock', icon: Icons.inventory_2_outlined),
               ],
             ),
           ),

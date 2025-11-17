@@ -10,7 +10,7 @@ class LeadsScreen extends StatelessWidget {
     final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
 
 
-    final leads = const [
+    const leads = [
       _LeadItem(name: 'Rahul Patil', crop: 'Mango Sapling', qty: '20'),
       _LeadItem(name: 'Sita Deshmukh', crop: 'Tomato Seeds', qty: '5 packets'),
       _LeadItem(name: 'Vijay Shinde', crop: 'Cotton Sapling', qty: '50'),

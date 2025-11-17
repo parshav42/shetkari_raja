@@ -163,7 +163,7 @@ class SugercanePage extends StatelessWidget {
 
 
     // Example list of items for the grid — replace these with your actual items & assets
-    final items = const [
+    const items = [
       _CardItem(label: '86032', asset: 'assets/images/86032.png'),
       _CardItem(label: '10001', asset: 'assets/images/10001.png'),
       _CardItem(label: '265', asset: 'assets/images/265.png'),
@@ -242,8 +242,8 @@ class _ImageCard extends StatelessWidget {
     required this.label,
     required this.imageAsset,
     required this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

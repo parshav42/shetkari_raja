@@ -86,10 +86,10 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                           child: const Icon(Icons.image, color: AppColors.green, size: 40),
                         ),
                         const SizedBox(width: 14),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Mango Sapling (Kesar)', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: AppColors.textPrimary)),
                               SizedBox(height: 6),
                               Text('Green Leaf Nursery', style: TextStyle(color: AppColors.textSecondary)),
