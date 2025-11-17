@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class PurchaseScreen extends StatefulWidget {
-  const PurchaseScreen({super.key});
+  final VoidCallback? onBackToHome;
+  const PurchaseScreen({super.key, this.onBackToHome});
 
   @override
   State<PurchaseScreen> createState() => _PurchaseScreenState();
@@ -42,9 +43,20 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 2,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            color: AppColors.textPrimary,
+            onPressed: () {
+              if (widget.onBackToHome != null) {
+                widget.onBackToHome!();
+              } else {
+                Navigator.of(context).pop();
+              }
+            },
+          ),
           centerTitle: true,
           title: const Text(
-            'Purchase',
+            'Order',
             style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w800),
           ),
         ),

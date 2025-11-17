@@ -50,8 +50,8 @@ class _LogoAndTitle extends StatelessWidget {
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [AppColors.green, AppColors.blue],
             ),
             boxShadow: [

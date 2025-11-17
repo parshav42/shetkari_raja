@@ -1,28 +1,57 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
-class NurseryOtpLoginScreen extends StatefulWidget {
-  const NurseryOtpLoginScreen({super.key});
+class FarmerLoginScreen extends StatefulWidget {
+  const FarmerLoginScreen({super.key});
 
   @override
-  State<NurseryOtpLoginScreen> createState() => _NurseryOtpLoginScreenState();
+  State<FarmerLoginScreen> createState() => _FarmerLoginScreenState();
 }
 
-class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
+class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneCtrl = TextEditingController();
+  bool _otpSent = false;
+  final _otpCtrl = TextEditingController();
 
   @override
   void dispose() {
     _phoneCtrl.dispose();
+    _otpCtrl.dispose();
     super.dispose();
+  }
+
+  void _sendOtp() {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _otpSent = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('OTP sent to your phone')),
+      );
+    }
+  }
+
+  void _verifyOtp() {
+    final otp = _otpCtrl.text.trim();
+    if (otp.length == 4) {
+      // Simulate successful verification
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        '/farmer',
+        (route) => false,
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid 4-digit OTP')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-   final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+   
+ final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
     final lightBlue = Color.lerp(AppColors.blue, AppColors.green, 0.85)!;
-
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -36,6 +65,10 @@ class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
         body: SafeArea(
           child: Center(
@@ -78,7 +111,7 @@ class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Card
+                  // Login Card
                   Material(
                     color: Colors.white,
                     elevation: 10,
@@ -92,7 +125,7 @@ class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'Nursery Owner Login',
+                              'Farmer Login',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w800,
@@ -102,61 +135,91 @@ class _NurseryOtpLoginScreenState extends State<NurseryOtpLoginScreen> {
                             const SizedBox(height: 12),
                             TextFormField(
                               controller: _phoneCtrl,
+                              enabled: !_otpSent,
                               keyboardType: TextInputType.phone,
                               decoration: const InputDecoration(
                                 labelText: 'Phone Number',
                                 hintText: 'Enter phone number',
+                                prefixText: '+91 ',
                               ),
                               validator: (v) {
                                 final t = v?.trim() ?? '';
                                 if (t.isEmpty) return 'Please enter phone number';
-                                if (t.replaceAll(RegExp(r'[^0-9]'), '').length < 10) {
-                                  return 'Enter a valid phone number';
+                                final digits = t.replaceAll(RegExp(r'[^0-9]'), '');
+                                if (digits.length < 10) {
+                                  return 'Enter a valid 10-digit phone number';
                                 }
                                 return null;
                               },
                             ),
-                            const SizedBox(height: 16),
+                            if (_otpSent) ...[
+                              const SizedBox(height: 16),
+                              TextFormField(
+                                controller: _otpCtrl,
+                                keyboardType: TextInputType.number,
+                                maxLength: 4,
+                                decoration: const InputDecoration(
+                                  labelText: 'OTP',
+                                  hintText: 'Enter 4-digit OTP',
+                                  counterText: '',
+                                ),
+                                validator: (v) {
+                                  final otp = v?.trim() ?? '';
+                                  if (otp.isEmpty) return 'Please enter OTP';
+                                  if (otp.length != 4) {
+                                    return 'OTP must be 4 digits';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                            const SizedBox(height: 20),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState?.validate() ?? false) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('OTP sent')),
-                                    );
-                                  }
-                                },
+                                onPressed: _otpSent ? _verifyOtp : _sendOtp,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.green,
                                   foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                   textStyle: const TextStyle(fontWeight: FontWeight.w800),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
                                 ),
-                                child: const Text('Send OTP'),
+                                child: Text(_otpSent ? 'Verify OTP' : 'Send OTP'),
                               ),
                             ),
+                            if (_otpSent) ...[
+                              const SizedBox(height: 12),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Didn't receive OTP? ",
+                                    style: TextStyle(color: AppColors.textSecondary),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _otpSent = false;
+                                        _otpCtrl.clear();
+                                      });
+                                    },
+                                    child: const Text(
+                                      'Resend',
+                                      style: TextStyle(
+                                        color: AppColors.green,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                   SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/nursery-register');
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16,
-                        ),
-                      ),
-                      child: const Text('New User? Register Here'),
                     ),
                   ),
                 ],

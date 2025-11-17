@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color green = Color(0xFF4CAF50);
-  static const Color blue = Color(0xFF1E88E5);
+  static const Color green = Color(0xFF6DE28C);
+  static const Color blue = Color(0xFF4EAFE6);
   static const Color accent = Color(0xFFFFC107);
   static const Color card = Colors.white;
   static const Color textPrimary = Color(0xFF1A1A1A);
@@ -43,7 +43,7 @@ class AppTheme {
         ),
         iconTheme: IconThemeData(color: AppColors.textPrimary),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.card,
         elevation: 8,
         margin: const EdgeInsets.all(12),
@@ -94,11 +94,11 @@ class GradientBackground extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF4CAF50),
-            Color(0xFF1E88E5),
+            Color(0xFF6DE28C),
+            Color(0xFF4EAFE6),
           ],
         ),
       ),

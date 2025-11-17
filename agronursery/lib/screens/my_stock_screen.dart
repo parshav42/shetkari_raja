@@ -6,8 +6,9 @@ class MyStockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lightGreen = Color.lerp(AppColors.green, Colors.white, 0.85)!;
-    final lightBlue = Color.lerp(AppColors.blue, Colors.white, 0.85)!;
+   final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+    final lightBlue = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+
 
     final items = const [
       _StockItem(label: 'Mango Sapling', qty: '120', price: '₹180', color: AppColors.green),

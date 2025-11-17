@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'regiatration_page.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});
@@ -23,8 +24,8 @@ class RoleSelectionScreen extends StatelessWidget {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                         colors: [AppColors.green, AppColors.blue],
                       ),
                       boxShadow: [
@@ -44,14 +45,18 @@ class RoleSelectionScreen extends StatelessWidget {
                   _RoleButton(
                     title: 'Farmer',
                     icon: Icons.agriculture,
-                    onTap: () => Navigator.of(context).pushNamed('/farmer'),
+                    onTap: () => Navigator.of(context).pushNamed('/farmer-login'),
                   ),
                   const SizedBox(height: 14),
                   // Nursery Owner button
                   _RoleButton(
                     title: 'Nursery Owner',
                     icon: Icons.storefront,
-                    onTap: () => Navigator.of(context).pushNamed('/nursery'),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const NurseryRegisterPage(),
+                      ),
+                    ),
                   ),
                 ],
               ),

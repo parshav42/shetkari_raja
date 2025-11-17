@@ -14,14 +14,14 @@ class _NurseryOwnerScreenState extends State<NurseryOwnerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final lightGreen = Color.lerp(AppColors.green, Colors.white, 0.85)!;
-    final lightBlue = Color.lerp(AppColors.blue, Colors.white, 0.85)!;
+   final lightGreen = Color.lerp(AppColors.green, AppColors.blue, 0.85)!;
+    final lightBlue = Color.lerp(AppColors.blue, AppColors.green, 0.85)!;
 
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [lightGreen, lightBlue],
         ),
       ),
