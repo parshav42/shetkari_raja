@@ -97,7 +97,7 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: AppTheme.primaryColor,
         title: const Text(
